@@ -21,4 +21,19 @@ public record ListingController(ListingService listingService) {
     public @ResponseBody List<ListingResponseDto> getAllListings() {
         return listingService.getAllListings();
     }
+
+    @GetMapping("{listingId}")
+    public @ResponseBody ListingResponseDto getListingById(@PathVariable Long listingId) {
+        return listingService.getListingById(listingId);
+    }
+
+    @PutMapping("/{listingId}")
+    public @ResponseBody ListingResponseDto updateListing(@PathVariable Long listingId, @RequestBody ListingRequestDto listingRequestDto) {
+        return listingService.update(listingId, listingRequestDto);
+    }
+
+    @DeleteMapping("/{listingId}")
+    public void deleteListing(@PathVariable Long listingId) {
+        listingService.delete(listingId);
+    }
 }
